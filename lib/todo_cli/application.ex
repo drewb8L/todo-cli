@@ -8,6 +8,7 @@ defmodule TodoCli.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      TodoCli.Repo
       # Starts a worker by calling: Tdc.Worker.start_link(arg)
       # {Tdc.Worker, arg}
     ]

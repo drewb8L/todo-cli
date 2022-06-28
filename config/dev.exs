@@ -8,5 +8,3 @@ config :todo_cli, TodoCli.Repo,
 
 config :todo_cli,
   ecto_repos: [TodoCli.Repo]
-
-import_config "#{Mix.env()}.exs"

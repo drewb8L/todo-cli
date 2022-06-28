@@ -1,18 +1,17 @@
 defmodule TodoCli do
-  @moduledoc """
-  Documentation for `TodoCli`.
-  """
+  def add_list(title) do
+    title
+  end
 
-  @doc """
-  Hello world.
+  def remove_list(title) do
+    title
+  end
 
-  ## Examples
+  def update_list(title) do
+    title
+  end
 
-      iex> TodoCli.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def get_list(title) do
+    title
   end
 end
