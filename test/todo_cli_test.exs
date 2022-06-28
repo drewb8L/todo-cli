@@ -8,6 +8,7 @@ defmodule TodoCliTest do
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(TodoCli.Repo)
+    Ecto.Adapters.SQL.Sandbox.mode(TodoCli.Repo, {:shared, self()})
   end
 
   test "insert list" do
