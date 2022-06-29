@@ -27,22 +27,27 @@ defmodule TodoCliTest do
   test "Update list name" do
     list = TodoCli.Repo.insert!(%List{title: "My poorly named list"})
     bad_list = TodoCli.Repo.get!(List, list.id)
-    IO.inspect bad_list
+    IO.inspect(bad_list)
+
     from(l in List, where: l.id == ^list.id, update: [set: [title: "Better title"]])
     |> TodoCli.Repo.update_all([])
+
     new_list = TodoCli.Repo.get!(List, list.id)
     assert new_list.id == list.id
   end
 
   test "delete list by name" do
     list = TodoCli.Repo.insert!(%List{title: "House chores"})
-    result = case TodoCli.Repo.delete(list) do
-      {:ok, struct}  ->
-      "Deleted successfully"
 
-      {:error, _reason} ->
-      "Error"
-    end
+    result =
+      case TodoCli.Repo.delete(list) do
+        {:ok, struct} ->
+          "Deleted successfully"
+
+        {:error, _reason} ->
+          "Error"
+      end
+
     assert result == "Deleted successfully"
   end
 end
