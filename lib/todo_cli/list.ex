@@ -5,7 +5,7 @@ defmodule TodoCli.List do
 
   schema "lists" do
     field(:title, :string)
-    has_many(:items, TodoCl.ListItems)
+    has_many(:items, TodoCli.ListItems)
   end
 
   def changeset(list, attrs \\ %{}) do
