@@ -6,14 +6,11 @@ defmodule TodoCli do
   def add_list(title) do
     list = List.changeset(%List{}, %{title: title})
 
-    cond do
-      list.valid? ->
-        Repo.insert!(list)
-        "Your list '#{title}' has been created!"
-        list
-
-      list.valid? == false ->
-        list.errors
+    if list.valid? do
+      Repo.insert!(list)
+      "Your list '#{title}' has been created!"
+    else
+      "That title has already been used"
     end
   end
 
@@ -39,13 +36,27 @@ defmodule TodoCli do
   end
 
   def create_item(list_name, task) do
-    new_task = String.trim task
+    new_task = String.trim(task)
     list = Repo.get_by!(List, title: list_name)
 
     Ecto.build_assoc(list, :items)
     |> Ecto.Changeset.change(task: new_task, done: false)
     |> Repo.insert!()
 
-    IO.puts "Item successfully added"
+    IO.puts("Item successfully added")
+  end
+
+  def get_item(list, task) do
+    my_list = Repo.get_by!(List, title: list)
+
+    Repo.all(
+      from(i in ListItems,
+        where: i.list_id == ^my_list.id and i.task == ^task
+      )
+    )
+  end
+
+  def task_complete(task_name) do
+    TodoCli.ListItems.changeset2(%ListItems{id: task_name.id}, %{done: true}) |> Repo.update()
   end
 end

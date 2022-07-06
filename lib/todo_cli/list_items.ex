@@ -14,4 +14,9 @@ defmodule TodoCli.ListItems do
     |> cast(attrs, [:task, :done, :list_id])
     |> validate_required([:task])
   end
+
+  def changeset2(list_item, attrs) do
+    list_item
+    |> cast(attrs, [:done])
+  end
 end
