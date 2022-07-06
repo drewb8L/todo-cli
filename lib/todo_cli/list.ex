@@ -11,6 +11,7 @@ defmodule TodoCli.List do
   def changeset(list, attrs \\ %{}) do
     list
     |> cast(attrs, [:title])
+    |> unique_constraint(:title, message: "This title name is already in use, please choose a different name.")
     |> validate_required([:title])
   end
 end

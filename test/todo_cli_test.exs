@@ -5,7 +5,7 @@ defmodule TodoCliTest do
   alias TodoCli.{List, ListItems}
   import Ecto.Query
   import TodoCli.Repo
-  import Ecto.Changeset
+  import Main
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(TodoCli.Repo)
@@ -32,4 +32,6 @@ defmodule TodoCliTest do
     item = TodoCli.create_item("My test task", "my list for testing")
     assert item
   end
+
+
 end

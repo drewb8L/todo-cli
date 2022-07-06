@@ -10,6 +10,7 @@ defmodule TodoCli do
       list.valid? ->
         Repo.insert!(list)
         "Your list '#{title}' has been created!"
+        list
 
       list.valid? == false ->
         list.errors
@@ -26,22 +27,25 @@ defmodule TodoCli do
     end
   end
 
-  def update_list_title(title, new_title) do
-    list = Repo.get_by!(List, title: title)
+  def update_list_title(list, new_title) do
+    list = Repo.get_by!(List, title: list)
 
     from(l in List, where: l.id == ^list.id)
-    |> Repo.update_all(set: [title: new_title])
+    |> Repo.update_all(set: [title: String.trim(new_title)])
   end
 
   def get_list_by_title(title) do
     Repo.all(from(l in List, where: l.title == ^title, preload: [:items]))
   end
 
-  def create_item(task, list_name) do
+  def create_item(list_name, task) do
+    new_task = String.trim task
     list = Repo.get_by!(List, title: list_name)
 
     Ecto.build_assoc(list, :items)
-    |> Ecto.Changeset.change(task: task, done: false)
+    |> Ecto.Changeset.change(task: new_task, done: false)
     |> Repo.insert!()
+
+    IO.puts "Item successfully added"
   end
 end
