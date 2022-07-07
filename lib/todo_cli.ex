@@ -7,11 +7,13 @@ defmodule TodoCli do
     list = List.changeset(%List{}, %{title: title})
 
     if list.valid? do
+      IO.puts("Your list '#{title}' has been created!")
       Repo.insert!(list)
-      "Your list '#{title}' has been created!"
     else
-      "That title has already been used"
+      IO.puts("That title has already been used")
     end
+
+    list
   end
 
   def remove_list(title) do

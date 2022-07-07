@@ -10,13 +10,13 @@ defmodule TodoCliTest do
     Ecto.Adapters.SQL.Sandbox.mode(TodoCli.Repo, {:shared, self()})
   end
 
-  test "add_list/1" do
+  test "add_list/0" do
     list = TodoCli.add_list("My brand new list")
 
     assert list == "Your list 'My brand new list' has been created!"
   end
 
-  test "remove_list/1" do
+  test "remove_list/0" do
     TodoCli.add_list("trash list")
     list = TodoCli.remove_list("trash list")
 
@@ -29,13 +29,12 @@ defmodule TodoCliTest do
     assert item == :ok
   end
 
-# multiple inputs, needs fix
-#  test "get_list_and_items/2" do
-#    TodoCli.add_list("My list for testing")
-#    Main.get_list_and_items()
-#
-#    assert capture_io("My list for testing", fn ->
-#             IO.write Main.get_list_and_items
-#           end) == "Enter a list to retrieve: \n[] "
+# Will revisit IO testing later
+#  test "mark_task_done/0" do
+#    TodoCli.add_list("my list for testing")
+#    item = TodoCli.create_item("my list for testing", "my test task")
+#    mark_task_done()
 #  end
+
+
 end
