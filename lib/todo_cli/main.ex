@@ -14,9 +14,22 @@ defmodule Main do
       e in ArgumentError ->
         IO.puts("Title can not be blank.")
     end
+  end
 
+  def delete_list do
+    try do
+      list =
+        IO.gets("Enter the list you wat to remove: ")
+        |> String.trim
+        |> TodoCli.remove_list()
+        IO.puts("List removed.")
+        rescue
+      e in ArgumentError ->
+        IO.puts("Title can not be blank.")
 
-
+      e in Ecto.NoResultsError ->
+        IO.puts("That list doesn't exist." <> e.message)
+    end
   end
 
   def get_list_and_items() do

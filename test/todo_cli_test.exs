@@ -13,14 +13,14 @@ defmodule TodoCliTest do
   test "add_list/0" do
     list = TodoCli.add_list("My brand new list")
 
-    assert list == "Your list 'My brand new list' has been created!"
+    assert list
   end
 
   test "remove_list/0" do
     TodoCli.add_list("trash list")
     list = TodoCli.remove_list("trash list")
 
-    assert list == "Deleted successfully"
+    assert list
   end
 
   test "create_item/2" do
@@ -29,12 +29,19 @@ defmodule TodoCliTest do
     assert item == :ok
   end
 
+  test "task_complete/0" do
+    TodoCli.add_list("my list for testing")
+    TodoCli.create_item("my list for testing", "my test task")
+    item = TodoCli.get_item("my list for testing" ,"my test task") |> Enum.at(0)
+    complete = TodoCli.task_complete(item)
+    assert complete
+  end
+
 # Will revisit IO testing later
 #  test "mark_task_done/0" do
 #    TodoCli.add_list("my list for testing")
 #    item = TodoCli.create_item("my list for testing", "my test task")
 #    mark_task_done()
 #  end
-
 
 end

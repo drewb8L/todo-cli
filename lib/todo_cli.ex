@@ -5,25 +5,13 @@ defmodule TodoCli do
 
   def add_list(title) do
     list = List.changeset(%List{}, %{title: title})
-
-    if list.valid? do
-      IO.puts("Your list '#{title}' has been created!")
-      Repo.insert!(list)
-    else
-      IO.puts("That title has already been used")
-    end
-
-    list
+    IO.puts("Your list '#{title}' has been created!")
+    Repo.insert!(list)
   end
 
   def remove_list(title) do
     list = Repo.get_by!(List, title: title)
-
-    if Repo.delete!(list) do
-      "Deleted successfully"
-    else
-      "That list doesn't exist"
-    end
+    Repo.delete!(list)
   end
 
   def update_list_title(list, new_title) do
