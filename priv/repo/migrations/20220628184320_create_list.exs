@@ -6,6 +6,6 @@ defmodule TodoCli.Repo.Migrations.CreateList do
       add :title, :string
 
     end
-
+    create unique_index(:lists, [:title])
   end
 end

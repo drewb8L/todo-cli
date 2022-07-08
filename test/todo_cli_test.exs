@@ -1,35 +1,47 @@
 defmodule TodoCliTest do
   use ExUnit.Case, async: true
+  import ExUnit.CaptureIO
   doctest TodoCli
 
-  alias TodoCli.{List, ListItems}
-  import Ecto.Query
-  import TodoCli.Repo
-  import Ecto.Changeset
+  import Main
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(TodoCli.Repo)
     Ecto.Adapters.SQL.Sandbox.mode(TodoCli.Repo, {:shared, self()})
   end
 
+  test "add_list/0" do
+    list = TodoCli.add_list("My brand new list")
 
-
-  test "add_list/1" do
-    list = TodoCli.add_list("My new list that hasn't been created yet")
-
-    assert list == "Your list 'My new list that hasn't been created yet' has been created!"
+    assert list
   end
 
-  test "remove_list/1" do
+  test "remove_list/0" do
     TodoCli.add_list("trash list")
     list = TodoCli.remove_list("trash list")
 
-    assert list == "Deleted successfully"
+    assert list
   end
 
   test "create_item/2" do
     TodoCli.add_list("my list for testing")
-    item = TodoCli.create_item("My test task", "my list for testing")
-    assert item
+    item = TodoCli.create_item("my list for testing", "my test task")
+    assert item == :ok
   end
+
+  test "task_complete/0" do
+    TodoCli.add_list("my list for testing")
+    TodoCli.create_item("my list for testing", "my test task")
+    item = TodoCli.get_item("my list for testing" ,"my test task") |> Enum.at(0)
+    complete = TodoCli.task_complete(item)
+    assert complete
+  end
+
+# Will revisit IO testing later
+#  test "mark_task_done/0" do
+#    TodoCli.add_list("my list for testing")
+#    item = TodoCli.create_item("my list for testing", "my test task")
+#    mark_task_done()
+#  end
+
 end
