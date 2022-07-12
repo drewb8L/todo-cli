@@ -35,6 +35,12 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/telemetry" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/decimal" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/meck" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mock" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/tabula" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/meck" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/mock" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/tabula" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ecto" level="project" />
@@ -56,5 +62,10 @@
     <orderEntry type="library" name="tds" level="project" />
     <orderEntry type="library" name="benchee" level="project" />
     <orderEntry type="library" name="benchee_json" level="project" />
+    <orderEntry type="library" name="mock" level="project" />
+    <orderEntry type="library" name="meck" level="project" />
+    <orderEntry type="library" name="markdown" level="project" />
+    <orderEntry type="library" name="tabula" level="project" />
+    <orderEntry type="library" name="earmark" level="project" />
   </component>
 </module>

@@ -14,7 +14,7 @@ defmodule TodoCli.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :tabula],
       mod: {TodoCli.Application, []}
     ]
   end
@@ -25,7 +25,9 @@ defmodule TodoCli.MixProject do
       {:ecto, "~> 3.8.4"},
       {:postgrex, ">= 0.0.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ecto_sql, "~> 3.8"}
+      {:ecto_sql, "~> 3.8"},
+      {:mock, "~> 0.3.7"},
+      {:tabula, "~> 2.1.1"}
     ]
   end
 end
