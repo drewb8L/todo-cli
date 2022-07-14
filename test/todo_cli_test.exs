@@ -1,9 +1,10 @@
 defmodule TodoCliTest do
   use ExUnit.Case, async: true
-  import ExUnit.CaptureIO
+  alias TodoCli.Console
   doctest TodoCli
-
+  import Mock
   import Main
+  import Console
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(TodoCli.Repo)
@@ -32,16 +33,14 @@ defmodule TodoCliTest do
   test "task_complete/0" do
     TodoCli.add_list("my list for testing")
     TodoCli.create_item("my list for testing", "my test task")
-    item = TodoCli.get_item("my list for testing" ,"my test task") |> Enum.at(0)
+    item = TodoCli.get_item("my list for testing", "my test task") |> Enum.at(0)
     complete = TodoCli.task_complete(item)
     assert complete
   end
 
-# Will revisit IO testing later
-#  test "mark_task_done/0" do
-#    TodoCli.add_list("my list for testing")
-#    item = TodoCli.create_item("my list for testing", "my test task")
-#    mark_task_done()
-#  end
-
+  test_with_mock "mark_task_done/0", TodoCli.Console, input: fn _input -> "my test task" end do
+    TodoCli.add_list("my list for testing")
+    item = TodoCli.create_item("my list for testing", "my test task")
+    #      mark_task_done()
+  end
 end

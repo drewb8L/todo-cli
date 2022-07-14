@@ -1,21 +1,48 @@
 # TodoCli
 
-**TODO: Add description**
+**A simple cli todo list application**
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `todo_cli` to your list of dependencies in `mix.exs`:
+Clone the [Repo](https://github.com/drewb8L/todo-cli.git), cd into directory and run `mix deps.get`.
+Next run `min ecto.setup` to set up the database.
 
-```elixir
-def deps do
-  [
-    {:todo_cli, "~> 0.1.0"}
-  ]
-end
-```
+##Functions
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/todo_cli>.
+Run `iex -S mix` to access the functions in the Main module:
+
+*Create a new list and add one task*
+
+`Main.create_list`
+
+*Add a task to an existing list*
+
+`Main.add_item_to_list`
+
+*Display a list and all tasks*
+
+`Main.get_list_and_items`
+
+*Rename an existing list*
+
+`Main.change_list_title`
+
+*Mark one task as done*
+
+`Main.mark_task_done`
+
+*Mark all task as done in a list*
+
+`Main.complete_all_tasks`
+
+*Delete a task from a list*
+
+`Main.remove_task`
+
+*Remove a list and all its tasks*
+
+`Main.remove_list`
+
+
+
 
